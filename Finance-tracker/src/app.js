@@ -1,3 +1,4 @@
+const MONTHLY_BUDGET = 5000;
 let incomeForm = document.getElementById("incomeForm");
 let expenseForm = document.getElementById("expenseForm");
 

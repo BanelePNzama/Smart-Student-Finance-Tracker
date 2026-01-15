@@ -62,7 +62,7 @@
   
             <div class="col-md-4">
                 <div class="home-rows">
-                    <div class="home-card">
+                    <div class="home-card-0">
                         <div class="info-content">
                             <span class="material-symbols-outlined">
                                 info
@@ -70,7 +70,7 @@
                         </div>
                             Dashboard
                     </div>
-                    <div class="home-card">
+                    <div class="home-card-1">
                         <div class="info-content">
                             <span class="material-symbols-outlined">
                                 info
@@ -78,7 +78,7 @@
                         </div>
                             Income Management
                     </div>
-                    <div class="home-card">
+                    <div class="home-card-2">
                         <div class="info-content">
                             <span class="material-symbols-outlined">
                                 info
@@ -86,7 +86,7 @@
                         </div>
                             Reports
                     </div>
-                    <div class="home-card">
+                    <div class="home-card-3">
                         <div class="info-content">
                             <span class="material-symbols-outlined">
                                 info
@@ -116,7 +116,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="dashboard-card shadow-sm">
+                <div class="dashboard-card-2 shadow-sm">
                     <div class="card-body text-center">
                         <h6>Total Expenses</h6>
                         <h3 id="totalExpenses">R0</h3>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="dashboard-card shadow-sm">
+                <div class="dashboard-card-3 shadow-sm">
                     <div class="card-body text-center">
                         <h6>Remaining Balance</h6>
                         <h3 id="balance">R0</h3>
@@ -148,7 +148,7 @@
                         <input type="number" id="incomeAmount" class="form-control" placeholder="Amount" required>
                     </div>
                     <div class="col-md-3 d-grid">
-                        <button class="btn btn-success">Add Income</button>
+                        <button type="submit" class="btn btn-success">Add Income</button>
                     </div>
                 </form>
             </div>
@@ -170,14 +170,14 @@
                             <option>Data</option>
                             <option>Books</option>
                             <option>Rent</option>
-                            <option>Shopping</option>
+                            <option>Clothing</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <input type="number" id="expenseAmount" class="form-control" placeholder="Amount" required>
                     </div>
                     <div class="col-md-2 d-grid">
-                        <button class="btn btn-danger">Add Expense</button>
+                        <button type="submit" class="btn btn-danger">Add Expense</button>
                     </div>
                 </form>
             </div>
@@ -192,19 +192,27 @@
                      </ul>
                    </div>
                 </div>
+                <div id="budgetWarning" class="alert alert-danger d-none">
+                    ⚠️ Budget exceeded!
+                </div>
 
                 <!-- Reports -->
                 <div class="card mt-4 shadow-sm">
                     <div class="card-body">
                         <h5>Reports</h5>
-                        <canvas id="expenseChart" width="400" height="200"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="expenseChart" width="400" height="200"></canvas>
+                        </div>
                     </div>
 
         </div>
      </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="src/app.js"></script>
+    <script src="src/charts.js"></script>
+
 </body>
 
 </html>
