@@ -68,7 +68,7 @@ function renderExpenses() {
 
     li.innerHTML = `
       ${exp.name} (${exp.category})
-      <span>R${exp.amount}</span>
+      <span>- R${exp.amount}</span>
     `;
 
     expenseList.appendChild(li);
@@ -76,3 +76,69 @@ function renderExpenses() {
 }
 renderExpenses();
 updateDashboard();
+
+const incomeCard = document.getElementById("incomeCard");
+const expenseCard = document.getElementById("expenseCard");
+
+incomeCard.addEventListener("click", function () {
+    openModal(
+        "Income Sources",
+        incomes.map(inc => ({
+            label: inc.source,
+            amount: inc.amount
+        })),
+        "income"
+    );
+});
+
+
+expenseCard.addEventListener("click", function () {
+    openModal(
+        "Expense History",
+        expenses.map(exp => ({
+            label: `${exp.name} (${exp.category})`,
+            amount: exp.amount
+        })),
+        "expense"
+    );
+});
+
+
+function openModal(title, items, type) {
+    document.getElementById("modalTitle").textContent = title;
+
+    const list = document.getElementById("modalList");
+    list.innerHTML = "";
+
+    if (items.length === 0) {
+        list.innerHTML = `
+          <li class="list-group-item text-center text-muted">
+            No data available
+          </li>`;
+        return;
+    }
+
+    items.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+        const sign = type === "income" ? "+" : "−";
+        const colorClass = type === "income" ? "text-success" : "text-danger";
+
+        li.innerHTML = `
+            <span>${item.label}</span>
+            <strong class="${colorClass}">
+              ${sign} R${item.amount}
+            </strong>
+        `;
+
+        list.appendChild(li);
+    });
+
+    const modal = new bootstrap.Modal(
+        document.getElementById("detailsModal")
+    );
+    modal.show();
+}
+
+

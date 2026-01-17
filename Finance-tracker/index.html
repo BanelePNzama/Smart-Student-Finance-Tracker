@@ -45,7 +45,7 @@
        
     </div>
     <div class="flex-fill p-4 bg-light">
-     <div class="container py-4">
+       <div class="container py-4">
         <!-- Header -->
            <div class="text-center mb-4">
                <h1 class="fw-bold">🎓 Smart Student Finance Tracker</h1>
@@ -67,6 +67,9 @@
                             <span class="material-symbols-outlined">
                                 info
                             </span>
+                            <div class="tooltip-text">
+                                View your income, expenses, and reports at a glance
+                            </div>
                         </div>
                             Dashboard
                     </div>
@@ -75,6 +78,9 @@
                             <span class="material-symbols-outlined">
                                 info
                             </span>
+                            <div class="tooltip-text">
+                                Track all your income sources here
+                            </div>
                         </div>
                             Income Management
                     </div>
@@ -83,6 +89,9 @@
                             <span class="material-symbols-outlined">
                                 info
                             </span>
+                            <div class="tooltip-text">
+                                Reports of your income and expenses
+                            </div>
                         </div>
                             Reports
                     </div>
@@ -91,6 +100,9 @@
                             <span class="material-symbols-outlined">
                                 info
                             </span>
+                            <div class="tooltip-text">
+                                Track all your expenses here
+                            </div>
                         </div>
                             Expenses Tracking
                     </div>
@@ -107,7 +119,7 @@
         <!-- Dashboard -->
         <div class="dashboard-row row mb-4">
             <div class="col-md-4">
-                <div class="dashboard-card shadow-sm">
+                <div class="dashboard-card shadow-sm" id="incomeCard">
                     <div class="card-body text-center">
                         <h6>Total Income</h6>
                         <h3 id="totalIncome">R0</h3>
@@ -116,7 +128,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="dashboard-card-2 shadow-sm">
+                <div class="dashboard-card-2 shadow-sm" id="expenseCard">
                     <div class="card-body text-center">
                         <h6>Total Expenses</h6>
                         <h3 id="totalExpenses">R0</h3>
@@ -155,16 +167,19 @@
         </div>
 
         <!-- Expenses Tracking -->
-        <div class="card-income mb-4 shadow-sm">
-            <div class="card-body">
-                <h5>Add Expense</h5>
+        <div class="card-expenses mb-4 shadow-sm">
+                <div class="card-body">
+                   <h5>Add Expense</h5>
                 <form id="expenseForm" class="form-grid-vertical">
                     <div class="col-md-4">
                         <input type="text" id="expenseName" 
                         class="form-control" placeholder="Expense Name" required>
                     </div>
                     <div class="col-md-3">
-                        <select id="expenseCategory" class="form-select">
+                        <select id="expenseCategory" class="form-select" >
+                            <option value="" disabled selected hidden>
+                                Select Category
+                            </option>
                             <option>Food</option>
                             <option>Transport</option>
                             <option>Data</option>
@@ -204,12 +219,26 @@
                             <canvas id="expenseChart" width="400" height="200"></canvas>
                         </div>
                     </div>
-
+               </div>
         </div>
-     </div>
+    </div>
+
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" id="modalList"></ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="src/app.js"></script>
     <script src="src/charts.js"></script>
 
