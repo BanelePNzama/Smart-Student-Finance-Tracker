@@ -1,4 +1,12 @@
-const MONTHLY_BUDGET = 5000;
+document.addEventListener("DOMContentLoaded", () => {
+    const user = localStorage.getItem("loggedInUser");
+
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+});
+
 let incomeForm = document.getElementById("incomeForm");
 let expenseForm = document.getElementById("expenseForm");
 
@@ -141,4 +149,13 @@ function openModal(title, items, type) {
     modal.show();
 }
 
+let user = localStorage.getItem("loggedInUser");
+let incomeKey = `income_${user}`;
+let expenseKey = `expenses_${user}`;
 
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+}
+incomes = JSON.parse(localStorage.getItem(incomeKey)) || [];
+expenses = JSON.parse(localStorage.getItem(expenseKey)) || [];

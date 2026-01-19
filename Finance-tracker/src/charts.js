@@ -43,4 +43,13 @@ function updateChart() {
     expenseChart.update();
 }
 
+const user = localStorage.getItem("loggedInUser");
+const expenses = JSON.parse(localStorage.getItem(`expenses_${user}`)) || [];
+
+window.addEventListener("load", () => {
+    if (window.expenseChart) {
+        window.expenseChart.resize();
+    }
+});
+
 updateChart();
