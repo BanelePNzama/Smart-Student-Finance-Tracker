@@ -1,5 +1,5 @@
 function getChartData() {
-    const categories = {};
+    let categories = {};
 
     expenses.forEach(exp => {
         categories[exp.category] =
@@ -12,16 +12,28 @@ function getChartData() {
     };
 }
 
-const ctx = document.getElementById("expenseChart").getContext("2d");
+let ctx = document.getElementById("expenseChart").getContext("2d");
 
-const chartData = getChartData();
+let chartData = getChartData();
 
-const expenseChart = new Chart(ctx, {
+let expenseChart = new Chart(ctx, {
     type: "pie",
     data: {
         labels: chartData.labels,
         datasets: [{
-            data: chartData.data
+            data: chartData.data,
+            backgroundColor: [
+                "#FF9800", 
+                "#21977e", 
+                "#0d6efd", 
+                "#fff", 
+                "#ca569a", 
+                "#f05b62", 
+                "rgb(202, 4, 202)", 
+                "blueviolet"  
+
+            ],
+            borderWidth: 1
         }]
     },
     options: {
@@ -35,21 +47,12 @@ const expenseChart = new Chart(ctx, {
 });
 
 function updateChart() {
-    const newData = getChartData();
+     let newData = getChartData();
 
     expenseChart.data.labels = newData.labels;
     expenseChart.data.datasets[0].data = newData.data;
 
     expenseChart.update();
 }
-
-const user = localStorage.getItem("loggedInUser");
-const expenses = JSON.parse(localStorage.getItem(`expenses_${user}`)) || [];
-
-window.addEventListener("load", () => {
-    if (window.expenseChart) {
-        window.expenseChart.resize();
-    }
-});
 
 updateChart();

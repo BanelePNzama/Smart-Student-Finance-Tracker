@@ -123,6 +123,11 @@
     transform: scale(1.03);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
 }
+@media (max-width: 768px) {
+    .dashboard-row {
+        grid-template-columns: 1fr;
+    }
+}
 
 .forms-grid {
     display: grid;
