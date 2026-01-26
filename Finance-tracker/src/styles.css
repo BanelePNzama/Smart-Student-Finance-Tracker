@@ -129,11 +129,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
-@media (max-width: 768px) {
-    .forms-grid {
-        grid-template-columns: 1fr;
-    }
-}
+
 .card-income {
     background: #d3c4c4;
     border-radius: 2px;
@@ -172,21 +168,6 @@
 .form-grid-vertical button {
     width: 100%;
 
-}
-.card-expenses .form-grid-vertical input,
-.card-expenses .form-grid-vertical select {
-    width: 155%;
-}
-
-.card-expenses .form-grid-vertical button {
-    width: 120%;
-}
-
-
-@media (max-width: 768px) {
-    .form-grid-vertical {
-        grid-template-columns: 1fr;
-    }
 }
 
 .chart-wrapper {
@@ -261,15 +242,77 @@
     transform: scale(1.03);
 }
 
+/* 📱 Mobile responsiveness for home cards */
+@media (max-width: 768px) {
+    .home-rows {
+        grid-template-columns: 1fr;
+        /* Stack cards */
+        gap: 16px;
+        padding: 0 16px;
+    }
 
+    .home-card-0,
+    .home-card-1,
+    .home-card-2,
+    .home-card-3 {
+        font-size: 16px;
+        padding: 24px 16px;
+    }
 
-/* Login Page Styles Fix */
-.container {
-    margin-top: 50px;
-    background-color: #95a2af;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(225, 226, 223, 0.952);
-    color: #fff;
+    .home-image {
+        margin: 0;
+        margin-top: 20px;
+        text-align: center;
+        position: static;
+    }
 
+    .home-image img {
+        width: 100%;
+        height: auto;
+        max-width: 350px;
+        margin: 20px auto 0;
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .dashboard-card,
+    .dashboard-card-2,
+    .dashboard-card-3 {
+        padding: 40px 20px;
+        font-size: 16px;
+    }
+    .form-grid-vertical {
+        grid-template-columns: 1fr;
+    }
+    .forms-grid {
+        grid-template-columns: 1fr;
+    }
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1040;
+    }
+    
+    body {
+        padding-left: 0;
+    }
 }
+#sidebarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1030;
+    display: none;
+}
+
