@@ -1,14 +1,14 @@
-// ===== AUTH GUARD =====
+// Auth Guard 
 let user = localStorage.getItem("loggedInUser");
 if (!user) {
     window.location.href = "login.html";
 }
 
-// ===== USER STORAGE KEYS =====
+//  User Storage keys 
 let incomeKey = `income_${user}`;
 let expenseKey = `expenses_${user}`;
 
-// ===== ELEMENTS =====
+// elements
 let incomeForm = document.getElementById("incomeForm");
 let expenseForm = document.getElementById("expenseForm");
 
@@ -17,17 +17,17 @@ let totalExpensesEl = document.getElementById("totalExpenses");
 let balanceEl = document.getElementById("balance");
 let expenseList = document.getElementById("expenseList");
 
-// ===== LOAD USER DATA =====
+// Load User Data 
 let incomes = JSON.parse(localStorage.getItem(incomeKey)) || [];
 let expenses = JSON.parse(localStorage.getItem(expenseKey)) || [];
 
-// ===== SAVE FUNCTION =====
+// Save Function
 function saveData() {
     localStorage.setItem(incomeKey, JSON.stringify(incomes));
     localStorage.setItem(expenseKey, JSON.stringify(expenses));
 }
 
-// ===== DASHBOARD =====
+// Dashboard 
 function updateDashboard() {
     let totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
     let totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -38,24 +38,33 @@ function updateDashboard() {
     balanceEl.textContent = "R" + balance;
 }
 
-// ===== EXPENSE LIST =====
+//  Expense List 
 function renderExpenses() {
     expenseList.innerHTML = "";
 
+    incomes.forEach(inc => {
+        let li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between";
+        li.innerHTML =  `
+            ${inc.source}
+            <span class="text-success">+ R${inc.amount.toFixed(2)}</span>
+        `;
+        expenseList.appendChild(li);
+    });
     expenses.forEach(exp => {
         let li = document.createElement("li");
         li.className = "list-group-item d-flex justify-content-between";
 
         li.innerHTML = `
-          ${exp.name} (${exp.category})
-          <span>- R${exp.amount}</span>
+            ${exp.name} (${exp.category})
+            <span class="text-danger">- R${exp.amount.toFixed(2)}</span>
         `;
 
         expenseList.appendChild(li);
     });
 }
 
-// ===== ADD INCOME =====
+// Add Income
 incomeForm.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -69,7 +78,7 @@ incomeForm.addEventListener("submit", e => {
     incomeForm.reset();
 });
 
-// ===== ADD EXPENSE =====
+// Add Expense 
 expenseForm.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -86,7 +95,7 @@ expenseForm.addEventListener("submit", e => {
     expenseForm.reset();
 });
 
-// ===== MODALS =====
+// Modals
 incomeCard.addEventListener("click", () => {
     openModal(
         "Income Sources",
@@ -130,12 +139,12 @@ function openModal(title, items, type) {
     new bootstrap.Modal(detailsModal).show();
 }
 
-// ===== LOGOUT =====
+//  Logout
 function logout() {
     localStorage.removeItem("loggedInUser");
     window.location.href = "login.html";
 }
 
-// ===== INIT =====
+// Initial Render
 renderExpenses();
 updateDashboard();
