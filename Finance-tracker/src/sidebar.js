@@ -1,33 +1,48 @@
-const sidebar = document.getElementById("sidebar");
-const sidebarToggle = document.getElementById("sidebarToggle");
-const sidebarOverlay = document.getElementById("sidebarOverlay");
+document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.getElementById("sidebar");
+    const toggleBtn = document.getElementById("sidebarToggle");
+    const overlay = document.getElementById("sidebarOverlay");
+    const innerToggle = document.getElementById("sidebarInnerToggle");
+    const sections = document.querySelectorAll(".section");
 
-if (window.innerWidth < 768) {
-    sidebar.style.transform = "translateX(-260px)";
-    sidebar.style.transition = "transform 0.3s ease";
-}
-
-function openSidebar() {
-    sidebar.style.transform = "translateX(0)";
-    sidebarOverlay.style.display = "block";
-    document.body.style.overflow = "hidden"; 
-}
-
-function closeSidebar() {
-    sidebar.style.transform = "translateX(-260px)";
-    sidebarOverlay.style.display = "none";
-    document.body.style.overflow = "auto"; 
-}
-
-sidebarToggle.addEventListener("click", openSidebar);
-sidebarOverlay.addEventListener("click", closeSidebar);
-
-window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-        sidebar.style.transform = "translateX(0)";
-        sidebarOverlay.style.display = "none";
-        document.body.style.overflow = "auto";
-    } else {
-        sidebar.style.transform = "translateX(-260px)";
+    // Safety check
+    if (!sidebar || !toggleBtn) {
+        console.error("Sidebar elements missing");
+        return;
     }
+
+    toggleBtn.classList.add("open");
+
+    // Sidebar toggle button
+   toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+    });
+
+    // Overlay click closes sidebar
+    overlay.addEventListener("click", () => {
+        sidebar.classList.add("hidden");
+        toggleBtn.classList.remove("open");
+        toggleBtn.classList.add("closed");
+        overlay.style.display = "none";
+    });
+
+    // Inner toggle button
+   if (innerToggle) {
+    innerToggle.addEventListener("click", (e) => {
+        e.stopPropagation(); 
+        sidebar.classList.toggle("collapsed");
+    });
+}
+
+    function showSection(id) {
+        sections.forEach(sec => sec.style.display = "none");
+        document.getElementById(id).style.display = "block";
+    }
+
+    document.getElementById("homeSection")?.addEventListener("click", () => showSection("homeSection"));
+    document.getElementById("dashboardSection")?.addEventListener("click", () => showSection("dashboardSection"));
+    document.getElementById("incomeExpenseSection")?.addEventListener("click", () => showSection("incomeExpenseSection"));
+    document.getElementById("reportsSection")?.addEventListener("click", () => showSection("reportsSection"));
+
+    
 });

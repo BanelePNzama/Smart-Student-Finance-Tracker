@@ -16,6 +16,7 @@
     font-size: 20px;
     font-weight: 600;
     gap:20px;
+    cursor: pointer;
 }
 .home-card-1 {
     background: #21977e;
@@ -27,6 +28,7 @@
     font-size: 20px;
     font-weight: 600;
     gap: 20px;
+    cursor: pointer;
 }
 .home-card-2 {
     background: #ca569a;
@@ -38,6 +40,7 @@
     font-size: 20px;
     font-weight: 600;
     gap: 20px;
+    cursor: pointer;
 }
 .home-card-3 {
     background: #f05b62;
@@ -49,6 +52,7 @@
     font-size: 20px;
     font-weight: 600;
     gap: 20px;
+    cursor: pointer;
 }
 
 .home-image {
@@ -241,12 +245,48 @@
 .dashboard-card-2:hover {
     transform: scale(1.03);
 }
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    transition: width 0.3s ease;
+    position: relative;
+}
 
-/* 📱 Mobile responsiveness for home cards */
+.sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 48px;
+    cursor: pointer;
+}
+
+#sidebarInnerToggle {
+    font-size: 28px;
+    visibility: visible;
+    opacity: 1;
+    display: inline-flex;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .menu-text,
+.sidebar.collapsed h4,
+.sidebar.collapsed button {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+}
+
+
+/*  Mobile responsiveness for home cards */
 @media (max-width: 768px) {
     .home-rows {
         grid-template-columns: 1fr;
-        /* Stack cards */
         gap: 16px;
         padding: 0 16px;
     }
@@ -304,6 +344,7 @@
     body {
         padding-left: 0;
     }
+    
 }
 #sidebarOverlay {
     position: fixed;

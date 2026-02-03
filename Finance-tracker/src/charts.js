@@ -25,8 +25,7 @@ let expenseChart = new Chart(ctx, {
             backgroundColor: [
                 "#FF9800", 
                 "#21977e", 
-                "#0d6efd", 
-                "#fff", 
+                "#0d6efd",  
                 "#ca569a", 
                 "#f05b62", 
                 "rgb(202, 4, 202)", 
